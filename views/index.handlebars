@@ -1,13 +1,15 @@
-<section style="margin-top: 2rem; display: flex; flex-wrap:wrap; justify-content:center">
-  {{#each restaurant}}
-  <div class="card" style="width: 18rem; margin: 3px">
-    <a href="/restaurant/{{this.id}}">
-      <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}照片" style="height: 14rem">
-      <div class="card-body">
-        <p class="card-text">{{this.name}}
-        </p>
-      </div>
-    </a>
+<section style="width: 90vw">
+  <div style="margin-top: 2rem; display: flex; flex-wrap:wrap; justify-content:center">
+    {{#each restaurant}}
+    <div class="card" style="width: 18rem; margin: 3px">
+      <a href="/restaurant/{{this.id}}">
+        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}照片" style="height: 14rem">
+        <div class="card-body">
+          <p class="card-text">{{this.name}}
+          </p>
+        </div>
+      </a>
+    </div>
+    {{/each}}
   </div>
-  {{/each}}
 </section>

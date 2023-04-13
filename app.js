@@ -6,8 +6,6 @@ const restaurantList = require("./restaurant.json")
 app.set("view engine", "handlebars")
 app.engine("handlebars", handlebars({ defaultLayout: "main" }))
 
-app.use
-
 app.get("/", (req, res) => {
   res.render("index", { restaurant: restaurantList.results })
 })
