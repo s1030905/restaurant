@@ -1,0 +1,25 @@
+<section class="card" style="width: 40vw; margin-top: 1rem ;">
+  <div class="image" style="width: 40vw; padding:3px">
+    <img src="{{restaurant.image}}" class="card-img-top" alt="{{restaurant.name}}"
+      style="border-bottom: 1px solid darkgrey;">
+  </div>
+  <div class="card-body">
+    <form action="/restaurant/{{restaurant._id}}" method="post">
+      <ul style="text-decoration: none;">
+        <li>
+          <label for="name_en">英文: </label>
+          <input type="text" name="name_en" id="name_en" required>
+        </li>
+        <li>
+          <label for="description">簡介: </label>
+          <input type="text" name="description" id="description" required>
+        </li>
+        <li>
+          <label for="location">地址: </label>
+          <input type="text" name="location" id="location" required>
+        </li>
+      </ul>
+      <button type="submit">Done</button>
+    </form>
+  </div>
+</section>

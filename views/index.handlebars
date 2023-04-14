@@ -2,11 +2,13 @@
   <div style="margin-top: 2rem; display: flex; flex-wrap:wrap; justify-content:center">
     {{#each restaurant}}
     <div class="card" style="width: 18rem; margin: 0px 0.5rem 1rem">
-      <a href="/restaurant/{{this.id}}">
+      <form action="/restaurant/{{this._id}}/delete" method="post">
+        <button type="submit">X</button>
+      </form>
+      <a href="./restaurant/{{this._id}}">
         <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}照片" style="height: 14rem">
         <div class="card-body">
-          <p class="card-text">{{this.name}}
-          </p>
+          <p class="card-text">{{this.name}}</p>
         </div>
       </a>
     </div>
