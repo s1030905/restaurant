@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
     .then((restaurants) => {
       let restaurant =
         restaurants.filter((e) => e.name.includes(keyword) || e.name_en.toLocaleLowerCase().includes(keyword))
-      res.render("index", { restaurant })
+      res.render("index", { restaurant, keyword })
     })
     .catch((e) => console.log(e))
 })

@@ -1,5 +1,3 @@
-// const mongoose = require("mongoose")
-// const db = mongoose.connection
 const Restaurant = require("../restaurant")
 const restaurantList = require("../../restaurant.json")
 const db = require("../../config/mongoose")
