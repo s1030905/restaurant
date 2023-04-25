@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const passport = require("passport")
 const User = require("../../models/user")
+const bcrypt = require("bcryptjs")
 
 // ----------------------------------------------------------------login
 router.get("/login", (req, res) => {
@@ -10,7 +11,8 @@ router.get("/login", (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/user/login',
-  successRedirect: "/"
+  successRedirect: "/",
+  failureFlash: true
 }));
 
 // ----------------------------------------------------------------register
@@ -30,8 +32,13 @@ router.post("/register", (req, res) => {
         errors.push({ message: "此電子郵件已註冊過" })
         return res.render("register", { errors, name, email, password })
       }
-      return User.create({ name, email, password })
-        .then(() => { res.render("index") })
+      return bcrypt.genSalt(10)
+        .then((salt) => bcrypt.hash(password, salt))
+        .then((hash) =>
+          User.create({ name, email, password: hash })
+            .then(() => res.render("index"))
+            .catch((e) => console.log(e))
+        )
         .catch((err) => console.log(err))
     })
     .catch((err) => console.log(err))
