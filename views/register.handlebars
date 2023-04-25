@@ -3,7 +3,7 @@
     <div class="card card-body">
       <h1 class="text-center mt-3">Register</h1>
       {{> message }}
-      <form action="/users/register" method="post">
+      <form action="/user/register" method="post">
         <div class="form-group mb-3">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" value="{{name}}">
@@ -28,7 +28,7 @@
         </div>
       </form>
       <p class="lead mt-4">
-        Have an Account? <a href="/users/login">Login</a>
+        Have an Account? <a href="/user/login">Login</a>
       </p>
     </div>
   </div>

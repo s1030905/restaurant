@@ -12,12 +12,20 @@
 
 <body>
 
-  <nav class="nav navbar-dark bg-dark">
-    <div style="width: 100vw; height: 5rem; display:flex;align-items:center;justify-content:center">
+  <nav class="nav navbar-dark bg-dark" style="display: flex; align-items:center;justify-content:center">
+    <div style="width: 90vw; height: 5rem; display:flex;align-items:center;justify-content:space-between">
       <a href="/" style="text-decoration: none;">
         <h1 style="color:white">Restaurant2</h1>
       </a>
+      <div>
+        {{#if isAuthenticated}}
+        <a href="/user/logout" class="btn btn-light" style="">Logout</a>
+        {{else}}
+        <a href="/user/login" class="btn btn-light">Login</a>
+        {{/if}}
+      </div>
     </div>
+
   </nav>
 
   <form class="d-flex" style="margin-top: 2rem; display:flex; justify-content:center" action="/search">
