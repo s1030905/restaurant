@@ -20,6 +20,11 @@ const restaurantSchema = new Schema({
   image: {
     type: String,
     required: true
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    index: true
   }
 })
 

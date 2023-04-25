@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const PORT = process.env.PORT || 3000
 const handlebars = require("express-handlebars")
 const session = require("express-session")
 const methodOverride = require("method-override")
@@ -31,6 +32,6 @@ app.use((req, res, next) => {
 app.use(router)
 
 
-app.listen(2700, () => {
-  console.log("http://localhost:2700")
+app.listen(PORT, () => {
+  console.log("http://localhost:3000")
 })

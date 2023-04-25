@@ -25,7 +25,7 @@ router.post("/register", (req, res) => {
   const errors = []
   if (!name || !email || !password || !confirmPassword) { errors.push({ message: "請填寫所有欄位" }) }
   if (password !== confirmPassword) { errors.push({ message: "密碼與確認密碼不符" }) }
-  if (errors.length !== 0) { res.render("register", { name, email, password }) }
+  if (errors.length) { return res.render("register", { name, email, password, errors }) }
   User.findOne({ email })
     .then((user) => {
       if (user) {
@@ -36,7 +36,7 @@ router.post("/register", (req, res) => {
         .then((salt) => bcrypt.hash(password, salt))
         .then((hash) =>
           User.create({ name, email, password: hash })
-            .then(() => res.render("index"))
+            .then(() => res.redirect("/"))
             .catch((e) => console.log(e))
         )
         .catch((err) => console.log(err))
