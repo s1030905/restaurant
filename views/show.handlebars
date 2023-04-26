@@ -16,7 +16,14 @@
       </li>
     </ul>
     <div style="display: flex; justify-content:space-between">
-      <a href="/restaurant/{{restaurant._id}}/edit">Edit</a>
+      <div style="display: flex; align-items:center">
+        <a href="/restaurant/{{restaurant._id}}/edit">Edit</a>
+        {{!-- <form action="/restaurant/{{this._id}}?_method=PUT" method="post">
+          <button style="border: none; background-color:#ffffff; text-decoration:underline; color:#0d6efd">
+            Delete
+          </button>
+        </form> --}}
+      </div>
       <a href="/" class="">Back</a>
     </div>
 

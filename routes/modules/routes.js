@@ -2,6 +2,34 @@ const express = require("express")
 const router = express.Router()
 const restaurantList = require("../../models/restaurant")
 
+// ----------------------------------------------------------------favorite
+router.get("/favorite", (req, res) => {
+  let userId = req.user._id
+  restaurantList.find({ userId })
+    .lean()
+    .then((restaurant) => {
+      res.render("favorite", { restaurant })
+    })
+    .catch((e) => console.log(e))
+})
+
+router.put("/favorite/:id", (req, res) => {
+  let userId = req.user._id
+  let id = req.params.id
+  return restaurantList.findByIdAndUpdate({ _id: id }, { $set: { userId: userId } })
+    .then(() => res.redirect("/"))
+    .catch((e) => console.log(e))
+})
+
+// --------------------------------------------------------------delete
+router.put("/delete/:id", (req, res) => {
+  let id = req.params.id
+  return restaurantList.findByIdAndUpdate({ _id: id }, { $unset: { userId: null } })
+    .then(() => res.redirect("/restaurant/favorite"))
+    .catch((e) => console.log(e))
+})
+
+// ----------------------------------------------------------------restaurant
 router.get("/:id", (req, res) => {
   const id = req.params.id
   restaurantList.findById(id)
@@ -10,6 +38,7 @@ router.get("/:id", (req, res) => {
     .catch((e) => console.log(e))
 })
 
+// ----------------------------------------------------------------search
 router.get("/", (req, res) => {
   const keyword = req.query.keyword.toLocaleLowerCase()
   return restaurantList.find()
@@ -22,14 +51,7 @@ router.get("/", (req, res) => {
     .catch((e) => console.log(e))
 })
 
-router.delete("/:id", (req, res) => {
-  let id = req.params.id
-  return restaurantList.findById(id)
-    .then((e) => e.remove())
-    .then(() => res.redirect("/"))
-    .catch((e) => console.log(e))
-})
-
+// ----------------------------------------------------------------edit
 router.get("/:id/edit", (req, res) => {
   let id = req.params.id
   return restaurantList.findById(id)

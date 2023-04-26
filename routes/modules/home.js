@@ -2,9 +2,11 @@ const express = require("express")
 const router = express.Router()
 const restaurantList = require("../../models/restaurant")
 
+
 router.get("/", (req, res) => {
-  let userId = req.user._id
-  restaurantList.findOne({ userId })
+  // let userId = req.user._id
+  // restaurantList.find({ userId })
+  restaurantList.find()
     .lean()
     .then((restaurant) => {
       res.render("index", { restaurant })
