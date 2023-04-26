@@ -9,6 +9,7 @@ router.get("/favorite", (req, res) => {
     .lean()
     .then((restaurant) => {
       res.render("favorite", { restaurant })
+      console.log(restaurant)
     })
     .catch((e) => console.log(e))
 })
@@ -16,16 +17,19 @@ router.get("/favorite", (req, res) => {
 router.put("/favorite/:id", (req, res) => {
   let userId = req.user._id
   let id = req.params.id
-  return restaurantList.findOneAndUpdate({ _id: id }, { $set: { userId: userId } })
+  return restaurantList.findOneAndUpdate({ _id: id }, { $addToSet: { userId: userId } })
+    .then((i) => console.log(i))
     .then(() => res.redirect("/"))
     .catch((e) => console.log(e))
 })
 
 // --------------------------------------------------------------delete
 router.put("/delete/:id", (req, res) => {
+  let userId = req.user._id
   let id = req.params.id
-  return restaurantList.findOneAndUpdate({ _id: id }, { $unset: { userId: null } })
+  return restaurantList.findOneAndUpdate({ _id: id }, { $pull: { userId: userId } })
     .then(() => res.redirect("/restaurant/favorite"))
+    .then((i) => console.log(i))
     .catch((e) => console.log(e))
 })
 
